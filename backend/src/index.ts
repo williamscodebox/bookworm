@@ -3,7 +3,7 @@ import type { Request, Response } from "express"; // 👈 use `type` keyword
 import "dotenv/config";
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 // 👇 Define a root route
 app.get("/", (req: Request, res: Response) => {
