@@ -8,6 +8,10 @@ interface IUser extends Document {
   password: string;
   profileImage?: string;
   comparePassword(userPassword: string): Promise<boolean>;
+
+  // timestamps
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const userSchema = new mongoose.Schema<IUser>(
