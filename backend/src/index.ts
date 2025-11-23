@@ -2,6 +2,7 @@ import express from "express";
 import type { Request, Response } from "express"; // 👈 use `type` keyword
 import "dotenv/config";
 import authRoutes from "./routes/authRoutes.ts";
+import bookRoutes from "./routes/authRoutes.ts";
 import { connectDB } from "./lib/db.ts";
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/books", bookRoutes);
 
 // 👇 Define a root route
 app.get("/", (req: Request, res: Response) => {
