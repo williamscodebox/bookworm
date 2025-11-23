@@ -1,14 +1,9 @@
 import express from "express";
-import type { Request, Response } from "express";
-import { registerUser } from "../controllers/authController.ts";
+import { loginUser, registerUser } from "../controllers/authController.ts";
 
 const router = express.Router();
 
 router.post("/register", registerUser);
-
-router.post("/login", async (req: Request, res: Response) => {
-  // Handle user login
-  res.send("User logged in");
-});
+router.post("/login", loginUser);
 
 export default router;
