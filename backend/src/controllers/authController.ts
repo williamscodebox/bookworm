@@ -1,4 +1,3 @@
-import express from "express";
 import type { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User.ts";
@@ -6,8 +5,6 @@ import User from "../models/User.ts";
 interface JwtPayload {
   userId: string;
 }
-
-const router = express.Router();
 
 const generateToken = (userId: string): string => {
   if (!process.env.JWT_SECRET) {

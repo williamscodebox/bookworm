@@ -1,9 +1,11 @@
 import express from "express";
+import protectRoute from "../middleware/auth.middleware";
+import { createBook, getBooks } from "../controllers/bookController";
 
 const router = express.Router();
 
-router.post("/");
-router.get("/");
+router.post("/", protectRoute, createBook);
+router.get("/", protectRoute, getBooks);
 router.get("/user");
 router.delete("/:id");
 
