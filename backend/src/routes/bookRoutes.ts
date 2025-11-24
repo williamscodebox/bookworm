@@ -1,12 +1,13 @@
 import express from "express";
-import protectRoute from "../middleware/auth.middleware";
-import { createBook, getBooks } from "../controllers/bookController";
+import type { Router } from "express";
+import protectRoute from "../middleware/auth.middleware.ts";
+import { createBook, getBooks } from "../controllers/bookController.ts";
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.post("/", protectRoute, createBook);
 router.get("/", protectRoute, getBooks);
-router.get("/user");
-router.delete("/:id");
+// router.get("/user");
+// router.delete("/:id");
 
 export default router;

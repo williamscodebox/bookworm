@@ -2,7 +2,7 @@ import express from "express";
 import type { Request, Response } from "express"; // 👈 use `type` keyword
 import "dotenv/config";
 import authRoutes from "./routes/authRoutes.ts";
-import bookRoutes from "./routes/authRoutes.ts";
+import bookRoutes from "./routes/bookRoutes.ts";
 import { connectDB } from "./lib/db.ts";
 
 const app = express();
