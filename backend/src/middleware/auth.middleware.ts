@@ -2,6 +2,9 @@ import jwt from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
 import type { JwtPayload } from "jsonwebtoken";
 import User from "../models/User.ts";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Extend Express Request to include `user`
 interface AuthRequest extends Request {
@@ -36,13 +39,16 @@ const protectRoute = async (
     }
 
     // verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload & {
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET as jwt.Secret
+    ) as JwtPayload & {
       userId: string;
     };
 
     // find user
     const user = await User.findById(decoded.userId).select("-password");
-    if (!user) return res.status(401).json({ message: "Token is not valid" });
+    if (!user) return res.status(401).json({ message: "Token is no valid" });
 
     req.user = user;
     next();
