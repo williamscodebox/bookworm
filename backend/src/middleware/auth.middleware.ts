@@ -48,7 +48,7 @@ const protectRoute = async (
 
     // find user
     const user = await User.findById(decoded.userId).select("-password");
-    if (!user) return res.status(401).json({ message: "Token is no valid" });
+    if (!user) return res.status(401).json({ message: "Token is not valid" });
 
     req.user = user;
     next();
