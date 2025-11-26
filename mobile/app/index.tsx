@@ -15,6 +15,7 @@ export default function Index() {
         source={{
           uri: "https://res.cloudinary.com/dirm2bp53/image/upload/v1763951952/kpnncfde0xozzqiucbny.jpg",
         }}
+        style={{ width: 200, height: 200, borderRadius: 10 }}
       ></Image>
     </View>
   );
