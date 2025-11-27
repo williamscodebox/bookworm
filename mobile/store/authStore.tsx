@@ -6,6 +6,9 @@ type User = {
   id: string;
   username: string;
   email: string;
+  profileImage: string;
+  createdAt: string;
+  updatedAt: string;
   // add other fields returned by your API
 };
 
