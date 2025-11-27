@@ -9,6 +9,8 @@ type User = {
   // add other fields returned by your API
 };
 
+type AuthResult = { success: boolean; error?: string };
+
 type AuthState = {
   user: User | null;
   token: string | null;
@@ -19,12 +21,9 @@ type AuthState = {
     username: string,
     email: string,
     password: string
-  ) => Promise<{ success: boolean; error?: string }>;
+  ) => Promise<AuthResult>;
 
-  login: (
-    email: string,
-    password: string
-  ) => Promise<{ success: boolean; error?: string }>;
+  login: (email: string, password: string) => Promise<AuthResult>;
 
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
@@ -61,9 +60,10 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ token: data.token, user: data.user, isLoading: false });
 
       return { success: true };
-    } catch (error: any) {
+    } catch (err: unknown) {
       set({ isLoading: false });
-      return { success: false, error: error.message };
+      const message = err instanceof Error ? err.message : "Unknown error";
+      return { success: false, error: message };
     }
   },
 
@@ -92,9 +92,10 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ token: data.token, user: data.user, isLoading: false });
 
       return { success: true };
-    } catch (error: any) {
+    } catch (err: unknown) {
       set({ isLoading: false });
-      return { success: false, error: error.message };
+      const message = err instanceof Error ? err.message : "Unknown error";
+      return { success: false, error: message };
     }
   },
 
@@ -105,8 +106,8 @@ export const useAuthStore = create<AuthState>((set) => ({
       const user = userJson ? JSON.parse(userJson) : null;
 
       set({ token, user });
-    } catch (error) {
-      console.log("Auth check failed", error);
+    } catch (err) {
+      console.log("Auth check failed", err);
     } finally {
       set({ isCheckingAuth: false });
     }
